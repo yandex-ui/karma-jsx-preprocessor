@@ -11,8 +11,8 @@ module.exports = function(config) {
             'karma-expect',
             'karma-sinon',
             'karma-phantomjs-launcher',
-            require('index.js'),
-            require('src/adapter.js')
+            require('./index.js'),
+            require('./src/adapter.js')
         ],
         reporters: ['progress'],
         preprocessors: {
