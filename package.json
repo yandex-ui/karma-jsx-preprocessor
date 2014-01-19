@@ -20,6 +20,9 @@
     "name": "Maksim Ryzhikov",
     "email": "rv.maksim@yandex.com"
   },
+  "dependencies": {
+    "uglify-js": "~2.4"
+  },
   "peerDependencies": {
     "karma": ">=0.9"
   },

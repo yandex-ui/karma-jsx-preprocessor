@@ -1,5 +1,6 @@
 var path = require('path');
 var util = require('util');
+var uglify = require('uglify-js');
 
 var createPattern = function(file) {
     return {
@@ -18,8 +19,14 @@ var jsxLoader = function(logger, basePath) {
 
         log.debug('Processing "%s".', file.originalPath);
 
-        content = content.replace(/([\"\'])/gm, '\\$1');
-        content = content.replace(/(\r\n|\n|\r)/gm, "");
+        content = uglify.minify(content, {
+            fromString: true,
+            mangle: false,
+            compress: {
+                negate_iife: false
+            }
+        });
+        content = content.code.replace(/([\"\'])/gm, '\\$1');
         content = util.format('__jsx__.addServerFile("%s", "%s");', filePath, content);
 
         log.debug(content);
