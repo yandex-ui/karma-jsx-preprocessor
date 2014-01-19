@@ -26,7 +26,7 @@ var jsxLoader = function(logger, basePath) {
                 negate_iife: false
             }
         });
-        content = content.code.replace(/([\"\'])/gm, '\\$1');
+        content = content.code.replace(/(\\)/gm, '\\$1').replace(/([\"\'])/gm, '\\$1');
         content = util.format('__jsx__.addServerFile("%s", "%s");', filePath, content);
 
         log.debug(content);
