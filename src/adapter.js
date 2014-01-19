@@ -14,12 +14,17 @@
      */
     System.prototype.include = function(filepath, context) {
         var content = this.getFile(filepath);
+        var result;
 
         if (context) {
-            global.__jsx__.context[filepath] = context;
+            this.jsx.context[filepath] = context;
         }
 
-        return content.wrapper ? content() : content;
+        result = content.wrapper ? content() : content;
+
+        this.jsx.context[filepath] = null;
+
+        return result;
     };
 
     /**

@@ -66,5 +66,17 @@ describe('Testing API for server side javascript(jsx)', function() {
                 System: system
             })).to.be.eql('Hello Guest');
         });
+
+        it('should clear context after call module', function() {
+            jsx.addServerFile('/test/foo.js', 'function(User){return User.name}(User);');
+
+            system.include('/test/foo.js', {
+                User: {
+                    name: 'Guest'
+                }
+            });
+
+            expect(system.jsx.context['/test/foo.js']).to.be.equal(null);
+        });
     });
 });
