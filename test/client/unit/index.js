@@ -1,7 +1,5 @@
-/*global __jsx__*/
+/*global jsx*/
 describe('Testing API for server side javascript(jsx)', function() {
-    var jsx = __jsx__;
-
     describe('How use System object', function() {
         var system;
 

@@ -3,7 +3,7 @@
 
     var System = function(jsx) {
         this.fileSystem = {};
-        this.jsx = jsx || global.__jsx__;
+        this.jsx = jsx || global.jsx;
     };
 
     /**
@@ -66,7 +66,7 @@
      */
     jsx.addServerFile = function(filepath, content) {
         /*jshint evil:true*/
-        var wrapperFunction = new Function('with(__jsx__.context["' + filepath + '"] || {}){return ' + content + '}');
+        var wrapperFunction = new Function('with(jsx.context["' + filepath + '"] || {}){return ' + content + '}');
 
         wrapperFunction.wrapper = true;
 
@@ -80,5 +80,5 @@
     /**
      * export module
      */
-    global.__jsx__ = jsx;
+    global.jsx = jsx;
 }(this));

@@ -1,6 +1,5 @@
-/*global __jsx__*/
+/*global jsx*/
 describe('index', function() {
-    var jsx = __jsx__;
     var system;
 
     beforeEach(function() {
