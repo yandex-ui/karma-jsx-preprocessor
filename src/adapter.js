@@ -62,11 +62,15 @@
      * It also allow replace global server variable.
      *
      * @param {String} filepath The file path
-     * @param {String} content The file content
+     * @param {String | Function} content The file content
      */
     jsx.addServerFile = function(filepath, content) {
         /*jshint evil:true*/
-        var wrapperFunction = new Function('with(jsx.context["' + filepath + '"] || {}){return ' + content + '}');
+        var wrapperFunction = content;
+
+        if (typeof content === 'string') {
+            wrapperFunction = new Function('with(jsx.context["' + filepath + '"] || {}){return ' + content + '}');
+        }
 
         wrapperFunction.wrapper = true;
 
