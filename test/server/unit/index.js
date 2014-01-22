@@ -6,17 +6,23 @@ describe('index', function() {
         system = new jsx.System();
     });
 
-    it('should include server module', function() {
-        expect(system.include('karma-jsx-preprocessor/test/server/fixture/foo.jsx')).to.be.equal('Hello World');
+    it('should include simple server module', function() {
+        expect(system.include('karma-jsx-preprocessor/test/server/fixture/simple.jsx')).to.be.equal('Hello World');
     });
 
     it('should include server module and eval it in special context', function() {
-        var barModule = system.include('karma-jsx-preprocessor/test/server/fixture/bar.jsx', {
+        var barModule = system.include('karma-jsx-preprocessor/test/server/fixture/global-context.jsx', {
             User: {
                 name: 'Guest'
             }
         });
 
         expect(barModule()).to.be.equal('Hello Guest');
+    });
+
+    it('should include server module with not valid javascript', function() {
+        var module = system.include('karma-jsx-preprocessor/test/server/fixture/notvalid-javascript.jsx');
+
+        expect(module()).to.be.equal(true);
     });
 });
