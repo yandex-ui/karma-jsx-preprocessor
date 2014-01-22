@@ -1,46 +1,49 @@
 {
-  "name": "karma-jsx-preprocessor",
-  "version": "0.0.7",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "grunt test"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/maksimr/karma-jsx-preprocessor.git"
-  },
-  "keywords": [
-    "karma-plugin",
-    "karma-preprocessor",
-    "jsx",
-    "builder"
-  ],
-  "author": {
-    "name": "Maksim Ryzhikov",
-    "email": "rv.maksim@yandex.com"
-  },
-  "peerDependencies": {
-    "karma": ">=0.9"
-  },
-  "license": "MIT",
-  "devDependencies": {
-    "grunt-contrib-jshint": "~0.6.0",
-    "grunt-contrib-watch": "~0.4.0",
-    "grunt-npm": "~0.0.2",
-    "grunt-bump": "~0.0.7",
-    "grunt-auto-release": "~0.0.2",
-    "load-grunt-tasks": "~0.2.0",
-    "grunt-cli": "~0.1.9",
-    "grunt": "~0.4.1",
-    "mocha": "~1.8",
-    "sinon": "~1.6",
-    "grunt-karma": "~0.7.0",
-    "karma": "~0.11.12",
-    "karma-expect": "~1.0.0",
-    "karma-sinon": "~1.0.0",
-    "karma-mocha": "~0.1.1",
-    "karma-phantomjs-launcher": "~0.1.1"
-  },
-  "contributors": []
+    "name": "karma-jsx-preprocessor",
+    "version": "0.0.7",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "grunt test"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/maksimr/karma-jsx-preprocessor.git"
+    },
+    "keywords": [
+        "karma-plugin",
+        "karma-preprocessor",
+        "jsx",
+        "builder"
+    ],
+    "author": {
+        "name": "Maksim Ryzhikov",
+        "email": "rv.maksim@yandex.com"
+    },
+    "peerDependencies": {
+        "karma": ">=0.9"
+    },
+    "dependencies": {
+        "uglify-js": "~2.4"
+    },
+    "license": "MIT",
+    "devDependencies": {
+        "grunt-contrib-jshint": "~0.6.0",
+        "grunt-contrib-watch": "~0.4.0",
+        "grunt-npm": "~0.0.2",
+        "grunt-bump": "~0.0.7",
+        "grunt-auto-release": "~0.0.2",
+        "load-grunt-tasks": "~0.2.0",
+        "grunt-cli": "~0.1.9",
+        "grunt": "~0.4.1",
+        "mocha": "~1.8",
+        "sinon": "~1.6",
+        "grunt-karma": "~0.7.0",
+        "karma": "~0.11.12",
+        "karma-expect": "~1.0.0",
+        "karma-sinon": "~1.0.0",
+        "karma-mocha": "~0.1.1",
+        "karma-phantomjs-launcher": "~0.1.1"
+    },
+    "contributors": []
 }

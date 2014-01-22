@@ -25,4 +25,16 @@ describe('index', function() {
 
         expect(module()).to.be.equal(true);
     });
+
+    it('should include server module with leader single line comment', function() {
+        var module = system.include('karma-jsx-preprocessor/test/server/fixture/with-leader-single-comment.jsx');
+
+        expect(module()).to.be.equal(true);
+    });
+
+    it('should include server module with leader multiline comment', function() {
+        var module = system.include('karma-jsx-preprocessor/test/server/fixture/with-leader-multi-comment.jsx');
+
+        expect(module()).to.be.equal(true);
+    });
 });

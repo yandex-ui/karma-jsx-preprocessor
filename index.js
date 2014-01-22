@@ -1,5 +1,6 @@
 var path = require('path');
 var util = require('util');
+var uglify = require('uglify-js');
 
 var createPattern = function(file) {
     return {
@@ -18,7 +19,34 @@ var jsxLoader = function(logger, basePath) {
 
         log.debug('Processing "%s".', file.originalPath);
 
-        content = util.format('jsx.addServerFile("%s", function(){with(jsx.context["%s"] || {}){return %s}});', filePath, filePath, content);
+
+        /**
+         * Может быть не валидный javascript внутри jsx
+         * Стоит попробовать библиотеку для удалени комментариев
+         */
+        try {
+            // Valid javascript
+            content = uglify.minify(content, {
+                fromString: true,
+                mangle: false,
+                compress: {
+                    negate_iife: false
+                }
+            });
+            content = content.code;
+            content = util.format('jsx.addServerFile("%s", function(){with(jsx.context["%s"] || {}){return %s}});', filePath, filePath, content);
+        } catch (e) {
+            // Not Valid javascript
+            content = util.format('jsx.addServerFile("%s", function(){with(jsx.context["%s"] || {}){return (%s)}});', filePath, filePath, content);
+            content = uglify.minify(content, {
+                fromString: true,
+                mangle: false,
+                compress: {
+                    negate_iife: false
+                }
+            });
+            content = content.code;
+        }
 
         log.debug(content);
 
