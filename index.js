@@ -11,11 +11,12 @@ var createPattern = function(file) {
     };
 };
 
-var jsxLoader = function(logger, basePath) {
+var jsxLoader = function(logger, basePath, projectDir) {
     var log = logger.create('preprocessor.jsx');
 
     return function(content, file, done) {
-        var filePath = path.relative(basePath + '/..', file.originalPath);
+        var filePath = path.relative(basePath, file.originalPath);
+        filePath = path.join(projectDir || '', filePath);
 
         log.debug('Processing "%s".', file.originalPath);
 
@@ -54,7 +55,7 @@ var jsxLoader = function(logger, basePath) {
     };
 };
 
-jsxLoader.$inject = ['logger', 'config.basePath'];
+jsxLoader.$inject = ['logger', 'config.basePath', 'config.jsx.projectDir'];
 
 var jsxInit = function(files) {
     files.unshift(createPattern(__dirname + '/src/adapter.js'));

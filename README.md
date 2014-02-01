@@ -35,17 +35,35 @@ module.exports = function(config) {
 };
 ```
 
+Define project directory
+```js
+// karma.conf.js
+module.exports = function(config) {
+  config.set({
+    frameworks: ['jsx'],
+    preprocessors: {
+      '**/*.jsx': ['jsx']
+    },
+    jsx: {
+        projectDir: 'mail'
+    }
+  });
+};
+```
+
+Now you can include file by path `projectDir/<originalFilePath>`
+
 ## Usage
 
 ```js
 it('should include server module', function() {
     var system = new jsx.System();
-    expect(system.include('karma-jsx-preprocessor/test/server/fixture/foo.jsx')).to.be.equal('Hello World');
+    expect(system.include('projectDir/test/server/fixture/foo.jsx')).to.be.equal('Hello World');
 });
 
 it('should include server module and eval it in special context', function() {
     var system = new jsx.System();
-    var barModule = system.include('karma-jsx-preprocessor/test/server/fixture/bar.jsx', {
+    var barModule = system.include('projectDir/test/server/fixture/bar.jsx', {
         User: {
             name: 'Guest'
         }

@@ -18,6 +18,9 @@ module.exports = function(config) {
         preprocessors: {
             '**/*.jsx': ['jsx']
         },
+        jsx: {
+            projectDir: 'projectDir'
+        },
         port: 9876,
         colors: true,
         logLevel: config.LOG_DEBUG,
