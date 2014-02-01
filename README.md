@@ -51,7 +51,7 @@ module.exports = function(config) {
 };
 ```
 
-Now you can include file by path `projectDir/<originalFilePath>`
+Now you can include file by path `mail/<originalFilePath>`
 
 ## Usage
 
