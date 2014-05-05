@@ -16,42 +16,38 @@ var jsxLoader = function(logger, basePath, projectDir) {
 
     return function(content, file, done) {
         var filePath = path.relative(basePath, file.originalPath);
+        var uglifyOptions = {
+            fromString: true,
+            mangle: false,
+            compress: {
+                dead_code: false,
+                unused: false,
+                negate_iife: false
+            }
+        };
+        var uglifyContent = function(content) {
+            return uglify.minify(content, uglifyOptions).code;
+        };
+        var resultContent;
+
         filePath = path.join(projectDir || '', filePath);
-
         log.debug('Processing "%s".', file.originalPath);
-
 
         /**
          * Может быть не валидный javascript внутри jsx
          * Стоит попробовать библиотеку для удалени комментариев
          */
         try {
-            // Valid javascript
-            content = uglify.minify(content, {
-                fromString: true,
-                mangle: false,
-                compress: {
-                    negate_iife: false
-                }
-            });
-            content = content.code;
-            content = util.format('jsx.addServerFile("%s", function(){with(jsx.context["%s"] || {}){return %s}});', filePath, filePath, content);
+            resultContent = util.format('jsx.addServerFile("%s", function(){with(jsx.context["%s"] || {}){return %s}});', filePath, filePath, uglifyContent(content));
         } catch (e) {
             // Not Valid javascript
-            content = util.format('jsx.addServerFile("%s", function(){with(jsx.context["%s"] || {}){return (%s)}});', filePath, filePath, content);
-            content = uglify.minify(content, {
-                fromString: true,
-                mangle: false,
-                compress: {
-                    negate_iife: false
-                }
-            });
-            content = content.code;
+            resultContent = util.format('jsx.addServerFile("%s", function(){with(jsx.context["%s"] || {}){return (%s)}});', filePath, filePath, content);
+            resultContent = uglifyContent(resultContent);
         }
 
-        log.debug(content);
+        log.debug(resultContent);
 
-        done(content);
+        done(resultContent);
     };
 };
 

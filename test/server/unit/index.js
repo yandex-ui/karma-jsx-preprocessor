@@ -37,4 +37,10 @@ describe('index', function() {
 
         expect(module()).to.be.equal(true);
     });
+
+    it('should include server module with function inside grouping operator', function() {
+        var module = system.include('projectDir/test/server/fixture/with-grouping-operator.jsx');
+
+        expect(module()).to.be.equal(true);
+    });
 });
